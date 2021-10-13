@@ -1,6 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'Task management function', type: :system do
+ 
+
   describe 'New creation function' do
+      
     context 'When creating a new task' do
       it 'The created task is displayed' do  # Create a task for use in testing
         task = FactoryBot.create(:task, name: 'task')
@@ -12,12 +15,17 @@ RSpec.describe 'Task management function', type: :system do
         # The result of expect is true Then test successful, false If so, the result is output as a failure
       end
     end
-  end
-  describe 'List display function' do
-    context 'When transitioning to the list screen' do
-      it 'The created task list is displayed' do
+
+    context 'When tasks are arranged in descending order of creation date and time' do
+        it 'New task is displayed at the top' do
+          # Implement here
+           FactoryBot.create(:task, name: 'task_01', content: 'content_01' )
+           FactoryBot.create(:task, name: 'task_02', content: 'content_02')
+           visit tasks_path
+           task_list = all('.task_row') 
+           expect(task_list[0]).to have_content 'task_02'
+        end
       end
-    end
   end
   describe 'Detailed display function' do
      context 'When transitioned to any task details screen' do
