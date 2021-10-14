@@ -20,6 +20,10 @@ module EveryleafProject
                        controller_specs: false,
                        request_specs: false
     end
+
+    config.time_zone = 'Berlin'
+    config.active_record.default_timezone = :local
+    config.i18n.default_locale = :en
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

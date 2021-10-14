@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  views:
+    messages: 
+      sample: sample
+      create_task: 'Task was successfully created !'
+      update_task: 'Task was successfully updated !'
+      delete_task: 'Task was successfully delete !'
