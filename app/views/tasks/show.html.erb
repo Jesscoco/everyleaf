@@ -9,6 +9,10 @@
   <strong>Content:</strong>
   <%= @task.content %>
 </p>
+<p>
+  <strong>Ending date:</strong>
+  <%= @task.ending_date %>
+</p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

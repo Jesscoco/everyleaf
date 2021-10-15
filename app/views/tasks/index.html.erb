@@ -1,12 +1,38 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Tasks</h1>
 
-<table>
+ <%= form_with(url: search_tasks_path, method: :get, local: true) do |f| %>
+      <% if defined? @search_title %>
+        <%= f.text_field :search_title,class:'form label mx-3', value: @search_title,style:'height:40px;width:200px'%>
+      <% else %>
+        <%= f.label 'Task name' %>
+        <%= f.text_field :search_title, class:'form'%>
+      <% end %>
+       <%= f.select :search_status,
+           Task.statuses.map { |k, v| [k, v] },
+           class: 'search_status form-control',
+           prompt: 'status'%>
+       <%= f.select :search_priority,
+           Task.priorities.map { |k, v| [k, v] },
+           class: 'search_priority form-control',
+           prompt: 'priority'%>
+
+ <%= f.submit 'search' ,class:'btn btn-light'%>
+
+      <% end %>
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'New Task', new_task_path , class:' btn btn-primary btn-sm text-white'%>
+<br>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Content</th>
+       <th>Deadline</th>
+       <th>Registered date</th>
+      <th>Status</th>
+      <th>Priority</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,14 +42,21 @@
       <tr>
         <td class="task_row"><%= task.name %></td>
         <td><%= task.content %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= task.ending_date %></td>
+        <td><%= task.created_at %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to 'Show', task, class:'btn btn-outline-primary btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) , class:'btn btn-outline-success btn-sm'%></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } , class:'btn btn-outline-danger btn-sm'%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= paginate @tasks %>
+
 
 <br>
+<%= link_to "Sort by priority", tasks_path(sort_priority: "true"), class:"btn btn-secondary text-white" %>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to "Sort by end deadline", tasks_path(sort_expired: "true"), class:"btn btn-secondary text-white"  %>
