@@ -53,10 +53,9 @@
     <% end %>
   </tbody>
 </table>
+<br>
 <%= paginate @tasks %>
 
-
-<br>
 <%= link_to "Sort by priority", tasks_path(sort_priority: "true"), class:"btn btn-secondary text-white" %>
 
 <%= link_to "Sort by end deadline", tasks_path(sort_expired: "true"), class:"btn btn-secondary text-white"  %>

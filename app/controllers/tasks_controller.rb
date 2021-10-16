@@ -84,9 +84,9 @@ class TasksController < ApplicationController
         @tasks = Task.all.search_by_priority(params[:search_priority]).kaminari params[:page] 
       end
     else
-      @tasks = Task.all 
+      @tasks = Task.all.kaminari params[:page]
     end
-    @tasks = Task.all 
+    @tasks = Task.all.kaminari params[:page]
 
     # @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
     render :index

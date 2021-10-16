@@ -72,9 +72,9 @@ RSpec.describe 'Task management function', type: :system do
           task2= FactoryBot.create(:ndtask)
           visit tasks_path
           fill_in 'search_title' , with: 'test_name01' 
-          select 'completed', from: 'search_status' 
+          select 'unstarted', from: 'search_status' 
           click_on 'search'
-          expect(page).not_to have_content 'test_name01'
+          expect(page).to have_content 'test_name01'
         end
         
       end
