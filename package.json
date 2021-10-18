@@ -1,5 +1,8 @@
 {
   "name": "everyleaf_project",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0"
+  }
 }
