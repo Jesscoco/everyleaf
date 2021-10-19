@@ -3,9 +3,9 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(2)
-    @tasks = Task.all.order(ending_date: :desc).page(params[:page]).per(2) if params[:sort_expired] == 'true' 
-    @tasks = Task.all.order(priority: :desc).page(params[:page]).per(2) if params[:sort_priority] == 'true' 
+    @tasks = current_user.tasks.all.order(created_at: :desc).page(params[:page]).per(2)
+    @tasks = current_user.tasks.all.order(ending_date: :desc).page(params[:page]).per(2) if params[:sort_expired] == 'true' 
+    @tasks = current_user.tasks.all.order(priority: :desc).page(params[:page]).per(2) if params[:sort_priority] == 'true' 
       
   end
 
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.user_id = current_user.id
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: I18n.t('views.messages.create_task') }
@@ -59,34 +59,34 @@ class TasksController < ApplicationController
     if params[:search_title].present?
       if params[:search_status].present?
         if params[:search_priority].present?
-          @tasks = Task.all.search_by_title(params[:search_title]).search_by_status(params[:search_status]).search_by_priority(params[:search_priority]).kaminari params[:page] 
+          @tasks = current_user.tasks.all.search_by_title(params[:search_title]).search_by_status(params[:search_status]).search_by_priority(params[:search_priority]).kaminari params[:page] 
         else
-          @tasks = Task.all.search_by_title(params[:search_title]).search_by_status(params[:search_status]).kaminari params[:page] 
+          @tasks = current_user.tasks.all.search_by_title(params[:search_title]).search_by_status(params[:search_status]).kaminari params[:page] 
         end
       elsif params[:search_priority].present?
-        @tasks = Task.all.search_by_title(params[:search_title]).search_by_priority(params[:search_priority]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_title(params[:search_title]).search_by_priority(params[:search_priority]).kaminari params[:page] 
       else
-        @tasks = Task.all.search_by_title(params[:search_title]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_title(params[:search_title]).kaminari params[:page] 
 
       end
     elsif params[:search_status].present?
       
       if params[:search_priority].present?
-        @tasks = Task.all.search_by_status(params[:search_status]).search_by_priority(params[:search_priority]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_status(params[:search_status]).search_by_priority(params[:search_priority]).kaminari params[:page] 
       else
-        @tasks = Task.all.search_by_status(params[:search_status]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_status(params[:search_status]).kaminari params[:page] 
       end
     elsif params[:search_priority].present?
       
       if params[:search_status].present?
-        @tasks = Task.all.search_by_priority(params[:search_priority]).search_by_status(params[:search_status]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_priority(params[:search_priority]).search_by_status(params[:search_status]).kaminari params[:page] 
       else
-        @tasks = Task.all.search_by_priority(params[:search_priority]).kaminari params[:page] 
+        @tasks = current_user.tasks.all.search_by_priority(params[:search_priority]).kaminari params[:page] 
       end
     else
-      @tasks = Task.all.kaminari params[:page]
+      @tasks = current_user.tasks.all.kaminari params[:page]
     end
-    @tasks = Task.all.kaminari params[:page]
+    @tasks = current_user.tasks.all.kaminari params[:page]
 
     # @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
     render :index

@@ -14,4 +14,38 @@
  *= require_self
  *= require bootstrap/dist/css/bootstrap.min.css
  */
+ body{
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu;
+    margin: 0;
+}
+header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color:#3b5998;
+}
+.left{
+    text-align: left;
+}
+.right{
+  margin-left: 50px;
+}
+header ul {
+  margin: 0;
+}
+ header ul a {
+    color: white;
+    text-decoration: none;
+}
+header li {
+  list-style: none;
+  display: inline;
+  margin-top: 10px;
+  margin-right:5px;
+}
+
+nav{
+        background-color:#1da1f2;
+    }
 

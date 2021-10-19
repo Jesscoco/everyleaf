@@ -1,0 +1,36 @@
+    <head>
+       <% if @user.errors.any? %>
+          <div id="error_explanation">
+          <h2> il y a <%= @user.errors.count %> erreurs</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+          </ul>
+          </div>
+       <% end %>
+    </head>
+    <div class="container">
+        <div class="side-one">
+            <div class="logo">
+            </div>
+        </div>
+        <div class="side-nd">
+            <div class="form">
+              <%= form_with(model: [:admin ,@user], local: true) do |f| %> 
+                <%= f.text_field :name, class:"field", placeholder: 'Nom' %> 
+                <%= f.email_field :email , class:"field", placeholder: 'Adresse e-mail' %>
+                <%= f.label 'Nommer admin'%>
+                <%= f.check_box :is_admin, class:'field'%>
+                <%= f.password_field :password, class:"field", placeholder: 'Nouveau mot de passe' %>  
+                 <%= f.password_field :password_confirmation, class:"field", placeholder: 'Confirmation de mot de passe' %> 
+
+                <%= f.submit "Update account",class:"btnlog" %>
+                 <%= link_to "Back", admin_users_path%> 
+                <% end %>
+               
+            </div>
+        </div>
+        
+    </div> 
+    

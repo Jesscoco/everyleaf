@@ -1,0 +1,73 @@
+<%
+=begin%>
+ <h1>Sign up</h1> 
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2> il y a <%= @user.errors.count %> erreurs</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <%= form_with(model: @user, local: true) do |f| %> 
+ <%= f.label :Name %> 
+ <%= f.text_field :name %> 
+ <%= f.label :Email %> 
+ <%= f.email_field :email %> 
+ <%= f.label :Password %> 
+ <%= f.password_field :password %> 
+ <%= f.label :Password_confirmation %> 
+ <%= f.password_field :password_confirmation %> 
+ <%= f.submit "Create my account" %> 
+ <% end %> 
+<%
+=end%>
+<html>
+    <head>
+       <% if @user.errors.any? %>
+          <div id="error_explanation">
+          <h2> il y a <%= @user.errors.count %> erreurs</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+          </ul>
+          </div>
+       <% end %>
+    </head>
+    <body>  
+    <div class="container">
+        <div class="side-one">
+            <div class="logo">
+            </div>
+                <h2> Avec Facebook, partagez et restez en contact avec votre entourage</h2>
+        </div>
+        <div class="side-nd">
+            <div class="form">
+              <%= form_with(model: @user, local: true) do |f| %> 
+                <%= f.text_field :name, class:"field", placeholder: 'Nom' %> 
+                <%= f.email_field :email , class:"field", placeholder: 'Adresse e-mail' %>
+                <%= f.password_field :password, class:"field", placeholder: 'Nouveau mot de passe' %>  
+                 <%= f.password_field :password_confirmation, class:"field", placeholder: 'Confirmation de mot de passe' %> 
+
+                <%= f.submit "Create my account",class:"btnlog" %>
+                <% end %>
+                <% if logged_in? %> 
+                <%= link_to "Profile", user_path(current_user.id) %>
+                <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+                <% else%> 
+
+                <% link_to "Sign up", new_user_path  %>
+                <%= link_to "Login", new_session_path ,class:"btlog"%>
+                <% end%> 
+            </div>
+            <div class="item"> <%= link_to "Créer une page"%> pour une célébrité, un groupe ou une entreprise </div>
+        </div>
+        
+    </div> 
+    
+
+    </body>     
+</html>
