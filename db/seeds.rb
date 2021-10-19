@@ -13,7 +13,7 @@
     end
 5.times do 
     Task.create(
-        user_id: user.id
+        user_id: user.id,
         name: 'task',
         content: 'content', 
         status:1,
