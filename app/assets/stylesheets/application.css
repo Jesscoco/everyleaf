@@ -23,7 +23,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color:#3b5998;
+  background-color:#3b9840;
 }
 .left{
     text-align: left;
@@ -46,6 +46,6 @@ header li {
 }
 
 nav{
-        background-color:#1da1f2;
+        background-color:#41f21d;
     }
 
