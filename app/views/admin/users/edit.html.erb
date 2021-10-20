@@ -1,5 +1,4 @@
-    <head>
-       <% if @user.errors.any? %>
+    <% if @user.errors.any? %>
           <div id="error_explanation">
           <h2> il y a <%= @user.errors.count %> erreurs</h2>
           <ul>
@@ -9,7 +8,6 @@
           </ul>
           </div>
        <% end %>
-    </head>
     <div class="container">
         <div class="side-one">
             <div class="logo">
