@@ -8,8 +8,27 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <header>
+          <ul>
+              
+              <li class="left"><a href="#"><strong> Everyleaf<em>Project</em></strong></a></li>
+          </ul>
+          <ul >
+              <% if logged_in? %> 
+            <li> <%= link_to "Profile", user_path(current_user.id), class: "right" %> </li>
+            <li> <%= link_to "Espace admin", admin_users_path, class: "right" %> </li>
+            <li><%= link_to "Logout", session_path(current_user.id), method: :delete , class: "right" %></li>
+
+            <% else%> 
+
+              <%= link_to "Sign up", new_user_path %>
+              <%= link_to "Login", new_session_path %>
+            <% end%>  
+          </ul>
+      </header>
+    <p id="notice" class='text-info'><%= notice %></p>
+
     <%= yield %>
   </body>
 </html>

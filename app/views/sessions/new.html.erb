@@ -1,0 +1,35 @@
+<html>
+    <head>
+    </head>
+    <body>  
+    <div class="container">
+        <div class="side-one">
+            <div class="logo">
+            </div>
+                <h2> Avec Facebook, partagez et restez en contact avec votre entourage</h2>
+        </div>
+        <div class="side-nd">
+            <div class="forms">
+                <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+                <%= f.email_field :email , class:"field", placeholder: 'Adresse e-mail' %>
+                <%= f.password_field :password, class:"field", placeholder: 'Mot de passe' %> 
+                <%= f.submit "Log in",class:"btnlog" %>
+                <%= link_to "Mot de passe oublié?", class:"items" %>
+                <% end %>
+                <% if logged_in? %> 
+                <%= link_to "Profile", user_path(current_user.id) %>
+                <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+                <% else%> 
+
+                <%= link_to "Sign up", new_user_path ,class:"btlog" %>
+                <% link_to "Login", new_session_path %>
+                <% end%> 
+            </div>
+            <div class="item"> <%= link_to "Créer une page"%> pour une célébrité, un groupe ou une entreprise </div>
+        </div>
+        
+    </div> 
+    
+
+    </body>     
+</html>

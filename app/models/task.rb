@@ -6,6 +6,8 @@ class Task < ApplicationRecord
     scope :search_by_priority, -> (priority) {where( priority: priority)}
     scope :kaminari, -> (kaminari_pages){page(kaminari_pages).per(5)}
     paginates_per 50
+    belongs_to :user 
+    
 
     enum status: {
         unstarted: 0,
