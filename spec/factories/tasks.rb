@@ -5,6 +5,7 @@ FactoryBot.define do
     ending_date {DateTime.now + 1.day}
     status {'unstarted'}
     priority {'low'}
+    user_id{ nil }
   end
 
   factory :ndtask, class: Task do
@@ -13,5 +14,6 @@ FactoryBot.define do
     ending_date {DateTime.now + 4.day}
     status {'completed'}
     priority {'high'}
+    user_id{ nil }
   end
 end

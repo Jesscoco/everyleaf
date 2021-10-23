@@ -11,7 +11,8 @@
     tasks.each do |task|
         task.update(user_id: User.last.id)
     end
-5.times do 
+    tag_array=['cafe', 'chocolat', 'vilain', 'sac','mentor']
+5.times do |x|
     Task.create(
         user_id: user.id,
         name: 'task',
@@ -19,6 +20,8 @@
         status:1,
         priority:2,
         ending_date: DateTime.now) 
+        Label.create(name: tag_array[x])
     end
+    
         
    
