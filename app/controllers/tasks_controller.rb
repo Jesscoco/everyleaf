@@ -122,7 +122,7 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.kaminari params[:page] 
     end
-    @tasks = Task.all.kaminari params[:page] 
+    #@tasks = Task.all.kaminari params[:page] 
     # @labels = Label.where(user_id: nil).or(Label.where(user_id: current_user.id))
     render :index
   end
