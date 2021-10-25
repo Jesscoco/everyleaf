@@ -34,6 +34,17 @@
     <%= form.select :priority, Task.priorities.keys %>
   </div>
   
+   <div class="row">
+   <h4> label </h4>
+      <% @labels.each do |label| %>
+      <div class="col m-3 col-lg-2">
+          <p>
+            <%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?,  disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <%=form.label :label_ids, label.name,value:label[:id],style:'text-decoration:none'%>
+          </p>
+        </div>
+     <% end %>
+     </div>
   <div class="actions">
     <%= form.submit %>
   </div>
